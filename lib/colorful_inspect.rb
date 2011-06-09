@@ -40,7 +40,7 @@ module ColorfulInspect
   end
 
   def break(q)
-    q.breakable ''
+    q.text "\n#{q.genspace[q.indent]}"
   end
 
   def colorize(q, type, string)
@@ -101,7 +101,7 @@ class Array
       index_width = (size - 1).to_s.size
 
       each_with_index do |elem, n|
-        q.breakable ''
+        ColorfulInspect.break q
         q.text "[#{n.to_s.rjust(index_width)}] "
         q.pp elem
         q.text "," if n != size - 1
@@ -118,7 +118,7 @@ class Hash
 
     ColorfulInspect.group(q, "{", "}") do
       each_with_index do |(key, val), n|
-        q.breakable ''
+        ColorfulInspect.break q
         q.pp key
         q.text " => "
         q.pp val
@@ -239,7 +239,7 @@ class Struct
 
     ColorfulInspect.group(q, "{", "}") do
       each_pair.with_index do |(key, val), n|
-        q.breakable ''
+        ColorfulInspect.break q
         q.pp key
         q.text " => "
         q.pp val

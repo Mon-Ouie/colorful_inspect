@@ -19,6 +19,7 @@ add colored formatting.
 
 Just require it and use pp as usual:
 
+```ruby
     require 'colorful_inspect'
 
     Person = Struct.new :first_name, :last_name
@@ -41,6 +42,7 @@ Just require it and use pp as usual:
         LoadError.new("could not find a good message"),
         PrettyPrint.new
       ]
+```
 
 And here's the output (without the colors):
 
@@ -115,7 +117,16 @@ And here's the output (without the colors):
 
 You can change the indentation as well as the used colors:
 
-    ColorfulInspect.indent = 4 # defaults to two
+```ruby
+ColorfulInspect.indent = 4 # defaults to two
 
-    # pp ColorfulInspect.colors to see available colors :)
-    ColorfulInspect.colors[:nil] = :red
+# pp ColorfulInspect.colors to see available colors :)
+ColorfulInspect.colors[:nil] = :red
+```
+
+Colors can also be disabled and reactivated:
+
+```ruby
+ColorfulInspect.colors.clear
+ColorfulInspect.colors = ColorfulInspect.default_colors
+```

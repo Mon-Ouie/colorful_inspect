@@ -11,29 +11,29 @@ module ColorfulInspect
     attr_accessor :colors
   end
 
-  self.indent = 2
-
-  self.colors = {
-    :numeric   => [:blue, :bold],
-    :bignum    => [:blue],
-    :fixnum    => [:blue, :bold],
-    :float     => [:blue, :bold],
-    :rational  => [:blue],
-    :true      => [:green, :bold],
-    :false     => [:red, :bold],
-    :nil       => [:red],
-    :symbol    => [:cyan, :bold],
-    :string    => [:green],
-    :date      => [:black],
-    :time      => [:black, :bold],
-    :class     => [:yellow, :bold],
-    :module    => [:yellow],
-    :method    => [:magenta],
-    :exception => [:red],
-    :ivar      => [:cyan]
-  }
-
   module_function
+  def default_colors
+    {
+      :numeric   => [:blue, :bold],
+      :bignum    => [:blue],
+      :fixnum    => [:blue, :bold],
+      :float     => [:blue, :bold],
+      :rational  => [:blue],
+      :true      => [:green, :bold],
+      :false     => [:red, :bold],
+    :nil       => [:red],
+      :symbol    => [:cyan, :bold],
+      :string    => [:green],
+      :date      => [:black],
+      :time      => [:black, :bold],
+      :class     => [:yellow, :bold],
+      :module    => [:yellow],
+      :method    => [:magenta],
+      :exception => [:red],
+      :ivar      => [:cyan]
+    }
+  end
+
   def group(q, open, close, &block)
     q.group(ColorfulInspect.indent, open, "\n#{q.genspace[q.indent]}#{close}",
             &block)
@@ -89,6 +89,9 @@ module ColorfulInspect
 
     [method.name.to_s, args, klass.to_s, location]
   end
+
+  self.indent = 2
+  self.colors = default_colors
 end
 
 class Array

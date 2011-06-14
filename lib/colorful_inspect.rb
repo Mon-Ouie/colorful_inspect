@@ -77,7 +77,7 @@ module ColorfulInspect
     end
 
     klass = if method.respond_to? :owner
-              method.owner.name
+              method.owner.to_s
             elsif method.inspect =~ /Method: (.*?)#/
               $1
             end
@@ -310,6 +310,7 @@ if $PROGRAM_NAME == __FILE__
       Time.now,
       String, Array, BasicObject, Enumerable,
       Array.instance_method(:each), 3.method(:succ), "foo".method(:pp),
+      File::Stat.instance_method(:mtime), Time.method(:now),
       Person.new("John", "Smith"),
       $stdout, $stdin,
       LoadError.new("could not find a good message"),

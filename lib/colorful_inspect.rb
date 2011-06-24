@@ -21,7 +21,7 @@ module ColorfulInspect
       :rational  => [:blue],
       :true      => [:green, :bold],
       :false     => [:red, :bold],
-    :nil       => [:red],
+      :nil       => [:red],
       :symbol    => [:cyan, :bold],
       :string    => [:green],
       :date      => [:black],

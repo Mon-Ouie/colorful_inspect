@@ -138,10 +138,22 @@ end
     alias colorless_pretty_print pretty_print
 
     define_method :pretty_print do |q|
-      q.text ColorfulInspect.colorize(q, type, to_s)
+      if to_s =~ /\A(\d+)\.(\d+)\z/
+        integral, fractional = $1, $2
+        integral   = integral.reverse.gsub(/\d{3}(?!$)/, '\&_').reverse
+        fractional = fractional.gsub(/\d{3}(?!$)/, '\&_')
+
+        q.text ColorfulInspect.colorize(q, type, "#{integral}.#{fractional}")
+      elsif to_s =~ /\A(\d+)\z/
+        integral = to_s.reverse.gsub(/\d{3}(?!$)/, '\&_').reverse
+        q.text ColorfulInspect.colorize(q, type, integral)
+      else
+        q.text ColorfulInspect.colorize(q, type, to_s)
+      end
     end
   end
 end
+
 
 class Rational
   alias colorless_pretty_print pretty_print
